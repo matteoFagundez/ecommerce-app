@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Row, Col, Image } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProduct } from "../services/productService";
+import CurrencyConverter from "./CurrencyConverter";
+import Header from "./Header";
 
 const ProductDetail = () => {
   const { id: productId } = useParams();
@@ -17,12 +19,16 @@ const ProductDetail = () => {
   return (
     <>
       {product ? (
+        <>
+        <Header />
         <Producto
           product={product}
           handleOnBack={() => {
             navigate("/");
           }}
         />
+        <CurrencyConverter priceUSD={product.price} />
+        </>
       ) : (
         <div
           style={{ width: "100vw", height: "100vh" }}
